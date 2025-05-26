@@ -18,7 +18,6 @@ const { isDialogLoading, dialogMode } = storeToRefs(dialogStore)
 const postcardTypes = ref([])
 const columns = [
   { prop: 'id', label: 'ID', width: '50' },
-  { prop: 'uploaded_id', label: 'uploaded_id', width: '50' },
   { prop: 'type', label: '類型', slot: 'typeIcon', width: '100' },
   { prop: 'name', label: '名稱', width: '150' },
   { prop: 'country', label: '國家', width: '150' },
