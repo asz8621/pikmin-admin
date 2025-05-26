@@ -1,18 +1,23 @@
 <script setup>
-import { ref } from 'vue'
-import { Moon, Sun, LogOut, Scan, PanelLeftOpen } from 'lucide-vue-next'
-import Sidebar from '../components/Sidebar.vue'
-import { useSidebar } from '@/composables/useSidebar'
-import Cookies from 'js-cookie'
-
-import axios from '@/plugins/axios'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import Cookies from 'js-cookie'
+import axios from '@/plugins/axios'
+import Sidebar from '@/components/Sidebar.vue'
+import { useUserStore } from '@/stores/useUserStore'
+import { useSidebar } from '@/composables/useSidebar'
 import { showMessage } from '@/utils/message'
+import { Moon, Sun, LogOut, Scan, PanelLeftOpen } from 'lucide-vue-next'
+
+const userStore = useUserStore()
+const { setUserData, isCheckUser } = userStore
+const { isCheck } = storeToRefs(userStore)
 
 const router = useRouter()
 
 const isDark = ref(false)
-const username = ref('John Doe')
+const username = ref('')
 
 const { openMobileSidebar } = useSidebar()
 
@@ -40,6 +45,23 @@ const logout = async () => {
     showMessage('success', '登出成功')
   }
 }
+
+const checkUser = async () => {
+  try {
+    const res = await axios.get('/admin/check')
+    const data = res.data
+    username.value = data.username
+    setUserData(data)
+    isCheckUser()
+  } catch (error) {
+    const defaultMessage = '發生未知錯誤，請稍後再試'
+    const message = error.response?.data?.message || error.message || defaultMessage
+    showMessage('error', `錯誤: ${message}`)
+  }
+}
+onMounted(() => {
+  if (!isCheck.value) checkUser()
+})
 </script>
 
 <template>
