@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/login',
-    component: () => import('@/views/LoginView.vue'),
+    component: () => import('@/layout/LoginLayout.vue'),
     children: [
       {
         path: '',
@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('@/views/DashboardView.vue'),
+    component: () => import('@/layout/DashboardLayout.vue'),
     meta: { requiresAuth: true },
     children: [
       {
