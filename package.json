@@ -12,13 +12,15 @@
   },
   "dependencies": {
     "axios": "^1.9.0",
+    "cropperjs": "^1.6.2",
     "dayjs": "^1.11.13",
     "element-plus": "^2.9.11",
     "js-cookie": "^3.0.5",
     "lucide-vue-next": "^0.511.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "vue3-clipboard": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
