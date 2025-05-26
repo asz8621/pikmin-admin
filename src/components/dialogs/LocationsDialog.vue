@@ -5,6 +5,7 @@ import { useDeviceStore } from '@/stores/useDeviceStore'
 import { useDialogStore } from '@/stores/useDialogStore'
 import { showMessage } from '@/utils/message'
 import LocationsImageDialog from '@/components/dialogs/LocationsImageDialog.vue'
+import OCRImage from '@/components/dialogs/OCRImageDialog.vue'
 import axios from '@/plugins/axios'
 
 defineProps({
@@ -21,6 +22,7 @@ defineProps({
     default: () => [],
   },
 })
+
 const postcardTypes = defineModel('postcardTypes')
 
 const emit = defineEmits(['submit'])
@@ -246,6 +248,7 @@ watch(
   },
 )
 
+// 裁切圖片
 const openImageDialog = () => {
   if (isDialogLoading.value) return
   imageUrl.value = dialogData.value.image
@@ -258,6 +261,8 @@ const cropped = ({ base64, file }) => {
     croppedBase64.value = base64
   }
 }
+
+// 取得位置資訊
 const isLocationLoading = ref(false)
 const getLocation = async () => {
   isLocationLoading.value = true
@@ -274,8 +279,17 @@ const getLocation = async () => {
   }
 }
 
+// 取得 OCR 名稱
+const isOCRDialogOpen = ref(false)
+const ocrImage = ref(null)
 const getLocationName = async () => {
-  console.log('getLocationName')
+  let imageData = dialogData.value.image
+  if (fileList.value.length > 0) imageData = fileList.value[0].raw
+  ocrImage.value = imageData
+  isOCRDialogOpen.value = true
+}
+const ocrFinished = (text) => {
+  dialogData.value.name = text
 }
 </script>
 
@@ -294,8 +308,7 @@ const getLocationName = async () => {
           <img
             :src="dialogData.image"
             alt="圖片預覽"
-            class="w-full rounded border border-gray-300"
-            style="max-width: 200px; max-height: 200px"
+            class="w-full rounded border border-gray-300 max-w-[200px] max-h-[200px]"
           />
         </div>
         <el-upload
@@ -309,14 +322,18 @@ const getLocationName = async () => {
           class="uploadImg w-full"
           list-type="picture"
         >
-          <el-button type="primary" class="w-full" :disabled="isDialogLoading">上傳圖片</el-button>
+          <el-button type="primary" class="w-full" :disabled="isDialogLoading">
+            上傳圖片
+          </el-button>
         </el-upload>
-        <el-divider v-if="croppedBase64" />
+        <el-divider v-if="croppedBase64" class="m-0" />
         <div v-if="dialogMode === 'edit'">
           <div v-if="croppedBase64">
-            <img :src="croppedBase64" alt="" style="max-width: 200px; max-height: 200px" />
+            <img :src="croppedBase64" alt="" class="max-w-[200px] max-h-[200px]" />
           </div>
-          <el-button :disabled="isDialogLoading" @click="openImageDialog">裁切圖片</el-button>
+          <el-button class="mt-2" :disabled="isDialogLoading" @click="openImageDialog">
+            裁切圖片
+          </el-button>
         </div>
       </div>
 
@@ -384,8 +401,12 @@ const getLocationName = async () => {
 
         <el-form-item label="隱藏版">
           <el-switch v-model="dialogData.explore" :disabled="isExploreDisabled">
-            <template #active-action><span class="custom-active-action">是</span></template>
-            <template #inactive-action><span class="custom-inactive-action">否</span></template>
+            <template #active-action>
+              <span class="custom-active-action">是</span>
+            </template>
+            <template #inactive-action>
+              <span class="custom-inactive-action">否</span>
+            </template>
           </el-switch>
         </el-form-item>
 
@@ -430,6 +451,12 @@ const getLocationName = async () => {
     v-model:isDialogImageOpen="isDialogImageOpen"
     v-model:imageUrl="imageUrl"
     @cropped="cropped"
+  />
+
+  <OCRImage
+    v-model:isOCRDialogOpen="isOCRDialogOpen"
+    :imageUrl="ocrImage"
+    @ocrFinished="ocrFinished"
   />
 </template>
 
