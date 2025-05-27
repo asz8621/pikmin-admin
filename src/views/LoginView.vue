@@ -41,10 +41,10 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="w-full max-w-sm p-6 bg-white rounded shadow">
-      <h2 class="text-2xl font-bold mb-6 text-center">登入</h2>
-
+  <div class="flex justify-center items-center min-h-screen bg-login bg-center bg-center">
+    <div class="w-full xs:w-[420px] p-6 mx-4 bg-white/75 rounded shadow">
+      <h2 class="text-2xl font-bold mb-6 text-center">Pikmin Map Dashboard</h2>
+      <el-divider class="border-black" />
       <el-form label-position="top" @submit.prevent="login">
         <el-form-item label="帳號">
           <el-input
