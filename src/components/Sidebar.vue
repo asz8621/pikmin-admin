@@ -61,7 +61,9 @@ watch(
             sidebarState ? 'basis-0 opacity-0' : 'flex-grow opacity-100',
           ]"
         >
-          <h1 class="text-lg font-bold">Admin</h1>
+          <h1 class="text-lg font-bold">
+            <img src="@/assets/images/logo.png" alt="logo" class="w-[150px]" />
+          </h1>
         </div>
 
         <component
