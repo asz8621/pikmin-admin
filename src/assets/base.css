@@ -1,0 +1,58 @@
+/* element-plus */
+:root {
+  /* light 模式自訂主色 */
+  --el-color-primary: #d3a452;
+  --el-color-primary-light-1: #d9ae62;
+  --el-color-primary-light-2: #deb672;
+  --el-color-primary-light-3: #e3be83;
+  --el-color-primary-light-4: #e8c794;
+  --el-color-primary-light-5: #ecd0a6;
+  --el-color-primary-light-6: #f0d8b8;
+  --el-color-primary-light-7: #f4e1ca;
+  --el-color-primary-light-8: #f7ebdc;
+  --el-color-primary-light-9: #fbf5ee;
+  --el-color-primary-dark-2: #a47e3d;
+
+  /* 警告色 warning */
+  --el-color-warning: #ff6f1a;
+  --el-color-warning-light-1: #ff7f33;
+  --el-color-warning-light-2: #ff8c47;
+  --el-color-warning-light-3: #ff9354;
+  --el-color-warning-light-4: #ffa069;
+  --el-color-warning-light-5: #ffb082;
+  --el-color-warning-light-6: #ffc199;
+  --el-color-warning-light-7: #ffd3b8;
+  --el-color-warning-light-8: #ffe4d1;
+  --el-color-warning-light-9: #fff0e0;
+  --el-color-warning-dark-2: #cc570f;
+}
+
+html.dark {
+  /* dark 模式重新覆蓋 */
+  --el-color-primary: #d3a452;
+  --el-color-primary-light-1: #b58e48;
+  --el-color-primary-light-2: #98793e;
+  --el-color-primary-light-3: #7c6534;
+  --el-color-primary-light-4: #61522a;
+  --el-color-primary-light-5: #473f21;
+  --el-color-primary-light-6: #2e2d18;
+  --el-color-primary-light-7: #171c10;
+  --el-color-primary-light-8: #0b0f08;
+  --el-color-primary-light-9: #050704;
+  --el-color-primary-dark-2: #a47e3d;
+
+  /* 警告色 warning */
+  --el-color-warning: #ff6f1a;
+  --el-color-warning-light-1: #ff7f33;
+  --el-color-warning-light-2: #ff8c47;
+  --el-color-warning-light-3: #ff9354;
+  --el-color-warning-light-4: #ffa069;
+  --el-color-warning-light-5: #ffb082;
+  --el-color-warning-light-6: #ffc199;
+  --el-color-warning-light-7: #ffd3b8;
+  --el-color-warning-light-8: #ffe4d1;
+  --el-color-warning-light-9: #fff0e0;
+  --el-color-warning-dark-2: #cc570f;
+
+  --el-menu-bg-color: #000;
+}

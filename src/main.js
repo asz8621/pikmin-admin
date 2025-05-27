@@ -7,6 +7,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@/assets/tailwind.css'
+import '@/assets/base.css'
 import zhTwOverride from './lang/zh-tw'
 import VueClipboard from 'vue3-clipboard'
 
