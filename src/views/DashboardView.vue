@@ -199,4 +199,9 @@ onMounted(() => {
     }
   }
 }
+.dark .cardItem {
+  .el-statistic__head {
+    @apply text-gray-400 text-sm;
+  }
+}
 </style>

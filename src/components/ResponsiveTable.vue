@@ -48,11 +48,7 @@ const { isPC } = storeToRefs(deviceStore)
 
     <!-- 手機版 -->
     <div v-else>
-      <div
-        v-for="row in tableData"
-        :key="row.id"
-        class="p-4 mb-4 border rounded bg-white shadow-sm"
-      >
+      <div v-for="row in tableData" :key="row.id" class="p-4 mb-4 border rounded shadow-sm">
         <div v-for="column in columns" :key="column.prop" class="mb-2">
           <strong>{{ column.label }}：</strong>
           <template v-if="$slots[column.slot]">

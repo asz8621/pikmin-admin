@@ -54,7 +54,7 @@ watch(
       :collapse="sidebarState"
       @select="selectMenuItem"
     >
-      <div class="flex items-center px-5 h-[56px]">
+      <div class="flex items-center px-5 h-[56px] mb-4">
         <div
           :class="[
             'transition-all duration-300 overflow-hidden whitespace-nowrap',
