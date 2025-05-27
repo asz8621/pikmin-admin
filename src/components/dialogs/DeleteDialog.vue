@@ -18,7 +18,7 @@ const { width } = storeToRefs(deviceStore)
 
 // 對話框寬度
 const dialogWidth = computed(() => {
-  return width.value > 576 ? '400px' : `${width.value - 20}px`
+  return width.value > 576 ? '400px' : `${width.value - 40}px`
 })
 
 const dialogStore = useDialogStore()

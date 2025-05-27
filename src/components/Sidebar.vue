@@ -74,7 +74,7 @@ watch(
       </div>
       <template v-for="item in menuItems" :key="item.index">
         <el-menu-item :index="item.index">
-          <el-icon class="menuIcon">
+          <el-icon class="!text-[24px] !mr-4">
             <component :is="item.icon" />
           </el-icon>
           <template #title>{{ item.title }}</template>
@@ -86,8 +86,7 @@ watch(
     <transition name="overlay-fade">
       <div
         v-if="isMobileCollapse"
-        class="fixed inset-0 z-40"
-        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }"
+        class="fixed inset-0 bg-black/50 z-40"
         @click="closeMobileSidebar"
       />
     </transition>
@@ -98,11 +97,6 @@ watch(
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 250px;
 }
-.menuIcon {
-  font-size: 24px !important;
-  margin-right: 1rem !important;
-}
-
 .overlay-fade-enter-active,
 .overlay-fade-leave-active {
   transition:

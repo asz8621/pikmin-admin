@@ -9,10 +9,16 @@ import { Copy, RotateCcw } from 'lucide-vue-next'
 const emit = defineEmits(['submit'])
 
 const deviceStore = useDeviceStore()
-const { isPC, width } = storeToRefs(deviceStore)
+const { width } = storeToRefs(deviceStore)
 
 const dialogWidth = computed(() => {
-  return isPC.value ? '500px' : `${width.value - 40}px`
+  if (width.value < 480) {
+    return `${width.value - 40}px`
+  } else if (width.value < 1024) {
+    return '450px'
+  } else {
+    return '500px'
+  }
 })
 
 const dialogStore = useDialogStore()

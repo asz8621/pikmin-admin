@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
         ref="imageRef"
         :src="imageUrl"
         alt="待裁切圖片"
-        style="max-width: 100%; max-height: 60vh; display: block; margin: 0 auto"
+        class="max-w-full max-h-[60vh] block mx-auto"
       />
     </div>
 

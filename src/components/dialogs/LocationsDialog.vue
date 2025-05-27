@@ -400,12 +400,12 @@ const ocrFinished = (text) => {
         </el-form-item>
 
         <el-form-item label="隱藏版">
-          <el-switch v-model="dialogData.explore" :disabled="isExploreDisabled">
+          <el-switch v-model="dialogData.explore" :disabled="isExploreDisabled" class="select-none">
             <template #active-action>
-              <span class="custom-active-action">是</span>
+              <span>是</span>
             </template>
             <template #inactive-action>
-              <span class="custom-inactive-action">否</span>
+              <span>否</span>
             </template>
           </el-switch>
         </el-form-item>

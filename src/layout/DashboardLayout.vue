@@ -86,7 +86,7 @@ onMounted(() => {
           <LogOut />
         </div>
       </el-header>
-      <el-main :class="isDark ? 'bg-black' : 'bg-gray-100'">
+      <el-main :class="isDark ? 'bg-black' : 'bg-gray-100'" class="p-2 xs:p-5">
         <router-view />
       </el-main>
     </el-container>

@@ -113,7 +113,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-6 space-y-6">
+  <div class="p-2 xs:p-6 space-y-4 xs:space-y-6">
     <h1 class="text-2xl font-bold">控制台總覽</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
