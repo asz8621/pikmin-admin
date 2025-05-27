@@ -340,10 +340,10 @@ const runOCR = async () => {
     ocrText.value = ''
     ocrSuccess.value = false
     isOCRLoading.value = false
-
     return
   }
   ocrText.value = result.data.text
+  ocrWaitText.value = ''
   ocrSuccess.value = true
   isOCRLoading.value = false
 }
@@ -459,13 +459,15 @@ const imageStyle = computed(() => {
         <el-button type="success" @click="runOCR"> 辨識文字 </el-button>
         <el-button type="warning" class="ml-2" @click="resetSelection"> 重新選取 </el-button>
       </div>
-      <div v-if="ocrText || ocrWaitText" class="mt-4">
-        <span class="mr-2">OCR 結果：</span>
-        <p v-if="!ocrText">{{ ocrWaitText }}</p>
-        <el-input v-else v-model="ocrText" placeholder="請輸入名稱" class="w-full sm:w-[300px]" />
-      </div>
+
+      <p v-if="ocrWaitText" class="mt-4">{{ ocrWaitText }}</p>
+
       <div v-if="ocrSuccess" class="mt-4">
-        <el-button type="primary" @click="setOCRText"> 確認 OCR 結果 </el-button>
+        <span class="mr-2">OCR 結果：</span>
+        <el-input v-model="ocrText" placeholder="請輸入名稱" class="w-full sm:w-[300px]" />
+        <div class="mt-4">
+          <el-button type="primary" @click="setOCRText"> 確認 OCR 結果 </el-button>
+        </div>
       </div>
     </div>
   </el-dialog>
