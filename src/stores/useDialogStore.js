@@ -20,6 +20,7 @@ export const useDialogStore = defineStore('dialog', () => {
 
   const closeDialog = () => {
     isDialogOpen.value = false
+    isDeleteDialogOpen.value = false
     isDialogLoading.value = false
     dialogMode.value = 'add'
     dialogData.value = {}
