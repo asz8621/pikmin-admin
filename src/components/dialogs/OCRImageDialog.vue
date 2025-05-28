@@ -355,6 +355,11 @@ const closeOCRDialog = () => {
   isOCRDialogOpen.value = false
 }
 
+// 去除 OCR 結果中的空格
+const removeSpaces = () => {
+  ocrText.value = ocrText.value.replace(/\s+/g, '')
+}
+
 // 設定 OCR 結果並關閉對話框
 const setOCRText = () => {
   emit('ocrFinished', ocrText.value)
@@ -464,7 +469,15 @@ const imageStyle = computed(() => {
 
       <div v-if="ocrSuccess" class="mt-4">
         <span class="mr-2">OCR 結果：</span>
-        <el-input v-model="ocrText" placeholder="請輸入名稱" class="w-full sm:w-[300px]" />
+
+        <el-input v-model="ocrText" placeholder="請輸入名稱" class="w-full sm:w-[300px]">
+          <template #append>
+            <div class="flex">
+              <el-button class="p-2" @click="removeSpaces"> 去除空格 </el-button>
+            </div>
+          </template>
+        </el-input>
+
         <div class="mt-4">
           <el-button type="primary" @click="setOCRText"> 確認 OCR 結果 </el-button>
         </div>
