@@ -3,15 +3,15 @@ import { ref } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const isCheck = ref(false)
-  const userdata = ref(null)
+  const userData = ref(null)
 
   const setUserData = (value) => {
-    userdata.value = value
+    userData.value = value
   }
 
   const isCheckUser = () => {
     isCheck.value = true
   }
 
-  return { userdata, isCheck, setUserData, isCheckUser }
+  return { userData, isCheck, setUserData, isCheckUser }
 })

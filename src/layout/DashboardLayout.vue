@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import Cookies from 'js-cookie'
@@ -11,13 +11,11 @@ import { showMessage } from '@/utils/message'
 import { Moon, Sun, LogOut, Scan, PanelLeftOpen } from 'lucide-vue-next'
 
 const userStore = useUserStore()
-const { setUserData, isCheckUser } = userStore
-const { isCheck } = storeToRefs(userStore)
+const { userData } = storeToRefs(userStore)
 
 const router = useRouter()
 
 const isDark = ref(false)
-const username = ref('')
 
 const { openMobileSidebar } = useSidebar()
 
@@ -45,23 +43,6 @@ const logout = async () => {
     showMessage('success', '登出成功')
   }
 }
-
-const checkUser = async () => {
-  try {
-    const res = await axios.get('/admin/check')
-    const data = res.data
-    username.value = data.username
-    setUserData(data)
-    isCheckUser()
-  } catch (error) {
-    const defaultMessage = '發生未知錯誤，請稍後再試'
-    const message = error.response?.data?.message || error.message || defaultMessage
-    showMessage('error', `錯誤: ${message}`)
-  }
-}
-onMounted(() => {
-  if (!isCheck.value) checkUser()
-})
 </script>
 
 <template>
@@ -80,7 +61,7 @@ onMounted(() => {
           <component :is="isDark ? Moon : Sun" />
         </div>
 
-        <span class="font-bold ml-4">{{ username }}</span>
+        <span v-if="userData" class="font-bold ml-4">{{ userData.username }}</span>
 
         <div class="ml-4 cursor-pointer" title="登出" @click="logout">
           <LogOut />
