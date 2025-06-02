@@ -2,6 +2,7 @@
 import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { storeToRefs } from 'pinia'
 import Tesseract from 'tesseract.js'
+import { OCRLangs } from '@/lang/OCRLangs.js'
 import { useDeviceStore } from '@/stores/useDeviceStore'
 import { showMessage } from '@/utils/message'
 
@@ -31,41 +32,7 @@ const mode = ref('move') // 'move' | 'select'
 const ocrSuccess = ref(false)
 const isMovable = ref(true)
 const langs = ref([])
-const langOptions = [
-  { value: 'eng', label: '英文(en)' },
-  { value: 'deu', label: '德文(de)' },
-  { value: 'fra', label: '法文(fr)' },
-  { value: 'spa', label: '西班牙文(es)' },
-  { value: 'por', label: '葡萄牙文(pt)' },
-  { value: 'ita', label: '義大利文(it)' },
-  { value: 'nld', label: '荷蘭文(nl)' },
-  { value: 'swe', label: '瑞典文(sv)' },
-  { value: 'dan', label: '丹麥文(da)' },
-  { value: 'nor', label: '挪威文(no)' },
-  { value: 'jpn', label: '日文(jp)' },
-  { value: 'kor', label: '韓文(ko)' },
-  { value: 'chi_sim', label: '簡體中文(zh-CN)' },
-  { value: 'chi_tra', label: '繁體中文(zh-TW)' },
-  { value: 'hin', label: '印地語(hi)' },
-  { value: 'ben', label: '孟加拉文(bn)' },
-  { value: 'tam', label: '泰米爾文(ta)' },
-  { value: 'tel', label: '泰盧固文(te)' },
-  { value: 'guj', label: '古吉拉特文(gu)' },
-  { value: 'mal', label: '馬拉雅拉姆文(ml)' },
-  { value: 'mar', label: '馬拉地文(mr)' },
-  { value: 'pan', label: '旁遮普文(pa)' },
-  { value: 'san', label: '梵文(sa)' },
-  { value: 'ara', label: '阿拉伯文(ar)' },
-  { value: 'heb', label: '希伯來文(he)' },
-  { value: 'rus', label: '俄文(ru)' },
-  { value: 'ukr', label: '烏克蘭文(uk)' },
-  { value: 'tur', label: '土耳其文(tr)' },
-  { value: 'tha', label: '泰文(th)' },
-  { value: 'vie', label: '越南文(vi)' },
-  { value: 'uzb', label: '烏茲別克文(uz)' },
-  { value: 'ell', label: '希臘文(el)' },
-  { value: 'grc', label: '古希臘語(gre)' },
-]
+const langOptions = OCRLangs
 
 // tesseract 辨識語系設定
 const langString = computed(() => {
