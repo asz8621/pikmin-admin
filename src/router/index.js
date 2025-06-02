@@ -76,7 +76,7 @@ const checkUser = async () => {
   }
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = Cookies.get('adminToken')
   const userStore = useUserStore()
   const { setUserData, isCheckUser } = userStore
@@ -85,7 +85,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.auth && !token) return next('/login')
 
   if (to.meta.auth && token && !isCheck.value) {
-    const data = checkUser()
+    const data = await checkUser()
     setUserData(data)
     isCheckUser()
   }
