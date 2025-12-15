@@ -126,6 +126,7 @@ const onError = () => {
       </el-form-item>
       <el-form-item v-if="dialogMode !== 'password'" label="權限">
         <el-select v-model="dialogData.role">
+          <el-option label="測試" :value="-1" />
           <el-option label="使用者" :value="1" />
           <el-option label="管理者" :value="10" />
         </el-select>
