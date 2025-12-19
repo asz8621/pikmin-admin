@@ -41,7 +41,7 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center min-h-screen bg-login bg-center bg-center">
+  <div class="flex justify-center items-center min-h-screen bg-login bg-center">
     <div class="w-full xs:w-[420px] p-6 mx-4 bg-white/75 rounded shadow">
       <h2 class="text-2xl font-bold mb-6 text-center">Pikmin Map Dashboard</h2>
       <el-divider class="border-black" />
