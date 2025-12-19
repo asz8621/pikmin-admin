@@ -165,7 +165,7 @@ const apiConfig = {
     error: '修改失敗',
   },
   delete: {
-    getUrl: (id) => `/admin/locations/${id}`,
+    getUrl: (id, status, userId) => `/admin/locations/${id}?status=${status}&userId=${userId}`,
     method: 'delete',
     error: '刪除失敗',
   },
@@ -190,7 +190,9 @@ const handleSubmit = async (data) => {
   const config = apiConfig[mode]
   const errorText = apiConfig[mode].error
 
-  const apiUrl = config.getUrl ? config.getUrl(apiData.id) : config.url
+  const apiUrl = config.getUrl
+    ? config.getUrl(apiData.id, apiData.image_status, apiData.uploaded_id)
+    : config.url
   const method = config.method
 
   try {
