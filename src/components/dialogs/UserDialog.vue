@@ -92,8 +92,14 @@ const onError = () => {
       <el-form-item v-if="dialogMode !== 'password'" label="名稱">
         <el-input v-model="dialogData.username" placeholder="請輸入名稱" />
       </el-form-item>
-      <el-form-item v-if="dialogMode !== 'password'" label="帳號">
+      <el-form-item
+        v-if="dialogMode !== 'password' && dialogData.provider === 'local'"
+        label="帳號"
+      >
         <el-input v-model="dialogData.account" placeholder="請輸入帳號" />
+      </el-form-item>
+      <el-form-item v-if="dialogMode !== 'password'" label="信箱">
+        <el-input v-model="dialogData.email" placeholder="請輸入信箱" />
       </el-form-item>
       <el-form-item v-if="dialogMode === 'add' || dialogMode === 'password'" label="密碼">
         <el-input

@@ -17,7 +17,7 @@ const { isDialogLoading, dialogMode } = storeToRefs(dialogStore)
 
 const columns = [
   { label: '名稱', prop: 'username' },
-  { label: '帳號', prop: 'account' },
+  { label: '帳號', prop: 'account', slot: 'account' },
   { label: '狀態', prop: 'is_active', slot: 'isActive' },
   { label: '最後更新時間', prop: 'updated_at', slot: 'updatedAt' },
   { label: '最後登入時間', prop: 'last_login', slot: 'lastLogin' },
@@ -71,10 +71,12 @@ const openModal = (mode, row = null) => {
       password: '',
       role: 1,
       is_active: true,
+      provider: 'local',
     },
     edit: { ...row },
     password: {
       id: row?.id,
+      provider: row?.provider,
       password: '',
     },
   }
@@ -182,6 +184,24 @@ const handleSubmit = async (data) => {
     </div>
 
     <ResponsiveTable class="mb-4" :tableData="tableData" :columns="columns" :loading="isLoading">
+      <template #account="{ row }">
+        <span v-if="row.provider === 'local'">{{ row.account }}</span>
+        <div v-else-if="row.provider === 'google'" class="inline-block">
+          <img
+            src="@/assets/images/google-icon.svg"
+            alt="Google"
+            class="w-[16px] h-[16px] object-contain"
+          />
+        </div>
+        <div v-else-if="row.provider === 'facebook'" class="inline-block">
+          <img
+            src="@/assets/images/facebook-icon.svg"
+            alt="Facebook"
+            class="w-[16px] h-[16px] object-contain"
+          />
+        </div>
+      </template>
+
       <template #isActive="{ row }">
         <span :class="row.is_active ? 'text-green-500' : 'text-red-500'">
           {{ row.is_active ? '啟用' : '停用' }}
@@ -214,6 +234,7 @@ const handleSubmit = async (data) => {
             type="warning"
             plain
             size="small"
+            :disabled="row.provider !== 'local'"
             @click="() => openModal('password', row)"
           >
             <RotateCcwKey class="w-4 h-4" />
