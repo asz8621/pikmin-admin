@@ -24,6 +24,7 @@ const columns = [
   { prop: 'city', label: '城市', width: '150' },
   { prop: 'coordinates', label: '座標', slot: 'coordinates' },
   { prop: 'features', label: '明信片類型', slot: 'features' },
+  { prop: 'contributors', label: '貢獻者', slot: 'contributors' },
   { prop: 'image_status', label: '狀態', slot: 'imageStatus', width: '100' },
 ]
 const imageStatusMap = {
@@ -178,6 +179,7 @@ const handleSubmit = async (data) => {
 
   apiData.features = JSON.stringify(apiData.features)
   delete apiData.coordinate
+  delete apiData.uploaded_user
 
   const formData = new FormData()
   for (const [key, value] of Object.entries(apiData)) {
@@ -319,6 +321,10 @@ const handleSubmit = async (data) => {
         <el-tag v-for="tag in row.features" :key="tag" class="tag-item mr-1" type="primary">
           {{ tag.name }}
         </el-tag>
+      </template>
+
+      <template #contributors="{ row }">
+        {{ row.uploaded_user }}
       </template>
 
       <template #imageStatus="{ row }">
