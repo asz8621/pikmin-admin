@@ -50,6 +50,12 @@ const routes = [
         component: () => import('@/views/PostcardTypeView.vue'),
         meta: { auth: true },
       },
+      {
+        path: 'reports',
+        name: 'Reports',
+        component: () => import('@/views/ReportsView.vue'),
+        meta: { auth: true },
+      },
     ],
   },
   {
@@ -76,13 +82,13 @@ const checkUser = async () => {
   }
 }
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from) => {
   const token = Cookies.get('adminToken')
   const userStore = useUserStore()
   const { setUserData, isCheckUser } = userStore
   const { isCheck } = storeToRefs(userStore)
 
-  if (to.meta.auth && !token) return next('/login')
+  if (to.meta.auth && !token) return '/login'
 
   if (to.meta.auth && token && !isCheck.value) {
     const data = await checkUser()
@@ -90,7 +96,7 @@ router.beforeEach(async (to, from, next) => {
     isCheckUser()
   }
 
-  next()
+  return true
 })
 
 export default router

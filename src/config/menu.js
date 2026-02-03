@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, FolderKanban, MapPinned } from 'lucide-vue-next'
+import { LayoutDashboard, Users, FolderKanban, MapPinned, MessageSquareText } from 'lucide-vue-next'
 
 export const menuItems = [
   {
@@ -24,5 +24,11 @@ export const menuItems = [
     icon: MapPinned,
     title: '位置管理',
     route: 'Locations',
+  },
+  {
+    index: '5',
+    icon: MessageSquareText,
+    title: '問題管理',
+    route: 'Reports',
   },
 ]
