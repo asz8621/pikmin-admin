@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import Cookies from 'js-cookie'
@@ -7,6 +6,7 @@ import axios from '@/plugins/axios'
 import Sidebar from '@/components/Sidebar.vue'
 import { useUserStore } from '@/stores/useUserStore'
 import { useSidebar } from '@/composables/useSidebar'
+import { useDarkMode } from '@/composables/useDarkMode'
 import { showMessage } from '@/utils/message'
 import { Moon, Sun, LogOut, Scan, PanelLeftOpen } from 'lucide-vue-next'
 
@@ -15,15 +15,9 @@ const { userData } = storeToRefs(userStore)
 
 const router = useRouter()
 
-const isDark = ref(false)
+const { isDark, toggleDark } = useDarkMode()
 
 const { openMobileSidebar } = useSidebar()
-
-const toggleDark = () => {
-  isDark.value = !isDark.value
-  document.documentElement.classList.toggle('dark', isDark.value)
-  document.documentElement.classList.toggle('light', !isDark.value)
-}
 
 const toggleFullscreen = () => {
   const el = document.documentElement
