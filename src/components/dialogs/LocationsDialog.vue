@@ -209,10 +209,12 @@ const submit = () => {
   if (!coordinate) return
 
   // 驗證其他欄位
-  const result = validateLocationData(dialogData.value)
-  if (!result.valid) {
-    result.errors.forEach((error) => showMessage('error', `錯誤: ${error}`))
-    return
+  if (dialogData.value.image_status !== 'rejected') {
+    const result = validateLocationData(dialogData.value)
+    if (!result.valid) {
+      result.errors.forEach((error) => showMessage('error', `錯誤: ${error}`))
+      return
+    }
   }
 
   // 新增
