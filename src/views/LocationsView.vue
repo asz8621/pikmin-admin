@@ -19,6 +19,7 @@ const postcardTypes = ref([])
 const columns = [
   { prop: 'id', label: 'ID', width: '50' },
   { prop: 'type', label: '類型', slot: 'typeIcon', width: '100' },
+  { prop: 'image', label: '圖片', slot: 'image', width: '100' },
   { prop: 'name', label: '名稱', width: '150' },
   { prop: 'country', label: '國家', width: '150' },
   { prop: 'city', label: '城市', width: '150' },
@@ -316,6 +317,10 @@ const handleSubmit = async (data) => {
       </template>
 
       <template #coordinates="{ row }"> {{ row.lat }}, {{ row.long }} </template>
+
+      <template #image="{ row }">
+        <el-image style="width: 75px; height: 75px" :src="row.image" fit="cover" />
+      </template>
 
       <template #features="{ row }">
         <el-tag v-for="tag in row.features" :key="tag" class="tag-item mr-1" type="primary">
