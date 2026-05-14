@@ -16,6 +16,7 @@ const { openDialog, closeDialog, setDialogLoading } = dialogStore
 const { isDialogLoading, dialogMode } = storeToRefs(dialogStore)
 
 const columns = [
+  { label: 'ID', prop: 'id' },
   { label: '名稱', prop: 'username' },
   { label: '帳號', prop: 'account', slot: 'account' },
   { label: '狀態', prop: 'is_active', slot: 'isActive' },
