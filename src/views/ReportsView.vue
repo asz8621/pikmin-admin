@@ -17,6 +17,7 @@ const { isDialogLoading } = storeToRefs(dialogStore)
 
 const columns = [
   { label: '問題類型', prop: 'report_type_name', slot: 'reportTypeName' },
+  { label: '地點名稱', prop: 'location_name' },
   { label: '使用者', prop: 'username' },
   { label: '狀態', prop: 'status', slot: 'status' },
   { label: '建立時間', prop: 'created_at', slot: 'createdAt' },
