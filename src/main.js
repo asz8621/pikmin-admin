@@ -19,7 +19,6 @@ app.use(ElementPlus, {
 
 app.use(createPinia())
 app.use(router)
-app.use(ElementPlus)
 app.use(VueClipboard, {
   autoSetContainer: true,
   appendToBody: true,
