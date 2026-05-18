@@ -733,7 +733,7 @@ const getLocation = async () => {
   isLocationLoading.value = true
   try {
     const coordinate = checkCoordinate(dialogData.value.coordinate)
-    const locationInfo = await axios.post('/admin/location-reviews/location-info', coordinate)
+    const locationInfo = await axios.post('/admin/location/location-info', coordinate)
     const { city, country } = locationInfo.data.data
     dialogData.value.country = country
     dialogData.value.city = city
