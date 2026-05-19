@@ -15,7 +15,11 @@ api.interceptors.request.use(
   (config) => {
     const token = Cookies.get('adminToken')
 
-    config.headers['Authorization'] = `Bearer ${token}`
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    } else {
+      delete config.headers['Authorization']
+    }
     startProgress()
     return config
   },

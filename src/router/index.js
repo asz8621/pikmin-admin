@@ -30,31 +30,31 @@ const routes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/DashboardView.vue'),
-        meta: { auth: true },
       },
       {
         path: 'users',
         name: 'Users',
         component: () => import('@/views/UsersView.vue'),
-        meta: { auth: true },
       },
       {
         path: 'locations',
         name: 'Locations',
         component: () => import('@/views/LocationsView.vue'),
-        meta: { auth: true },
       },
       {
         path: 'postcard-type',
         name: 'PostcardType',
         component: () => import('@/views/PostcardTypeView.vue'),
-        meta: { auth: true },
       },
       {
         path: 'reports',
         name: 'Reports',
         component: () => import('@/views/ReportsView.vue'),
-        meta: { auth: true },
+      },
+      {
+        path: 'test',
+        name: 'Test',
+        component: () => import('@/views/Test.vue'),
       },
     ],
   },
@@ -73,25 +73,31 @@ const router = createRouter({
 const checkUser = async () => {
   try {
     const res = await axios.get('/admin/check')
-    const data = res.data
-    return data
+    return res.data ?? res
   } catch (error) {
     const defaultMessage = '發生未知錯誤，請稍後再試'
     const message = error.response?.data?.message || error.message || defaultMessage
     showMessage('error', `錯誤: ${message}`)
+    return null
   }
 }
 
 router.beforeEach(async (to, from) => {
   const token = Cookies.get('adminToken')
+  const requiresAuth = to.matched.some((route) => route.meta.requiresAuth)
   const userStore = useUserStore()
   const { setUserData, isCheckUser } = userStore
   const { isCheck } = storeToRefs(userStore)
 
-  if (to.meta.auth && !token) return '/login'
+  if (requiresAuth && !token) return '/login'
 
-  if (to.meta.auth && token && !isCheck.value) {
+  if (requiresAuth && token && !isCheck.value) {
     const data = await checkUser()
+    if (!data) {
+      Cookies.remove('adminToken')
+      return '/login'
+    }
+
     setUserData(data)
     isCheckUser()
   }
